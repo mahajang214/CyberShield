@@ -1,4 +1,4 @@
-# 🛡️ Ransomware2.sh — Linux-Only Educational Encryption Tool
+# 🛡️ CyberShield.sh — Linux-Only Educational Encryption Tool
 
 > **⚠️ Disclaimer:** This script is for **educational and cybersecurity research purposes only**.  
 > Do **not** use it for unethical, illegal, or unauthorized activity.  
@@ -6,9 +6,9 @@
 
 ---
 
-## 📂 What is Ransomware2.sh?
+## 📂 What is CyberShield.sh?
 
-`Ransomware2.sh` is a Linux-only Bash script that simulates ransomware-style encryption and decryption of files and directories. It uses OpenSSL for AES-256-CBC encryption and `tar` for archiving folders.
+`CyberShield.sh` is a Linux-only Bash script that simulates ransomware-style encryption and decryption of files and directories. It uses OpenSSL for AES-256-CBC encryption and `tar` for archiving folders.
 
 ---
 
@@ -34,36 +34,36 @@ sudo dnf install openssl tar      # Fedora
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/mahajang214/ransomeware2.git
-cd ransomeware2
+git clone https://github.com/mahajang214/CyberShield.git
+cd CyberShield
 ```
 
 2. Make the script executable:
 
 ```bash
-chmod +x ransomeware2
+chmod +x CyberShield
 ```
 
-3. Run ransomeware2:
+3. Run CyberShield:
 
 ```bash
-./ransomeware2 folder password
+./CyberShield folder password
 ```
 
 ## EXAMPLE
 
 ```
-chmod +x ransomeware2.sh
+chmod +x CyberShield.sh
 
 # Encrypt a file
-./ransomeware2.sh secret.txt password
+./CyberShield.sh secret.txt password
 
 # Encrypt a folder
-./ransomeware2.sh my_folder password
+./CyberShield.sh my_folder password
 
 # Decrypt
-./ransomeware2.sh secret.txt password
-./ransomeware2.sh my_folder password
+./CyberShield.sh secret.txt password
+./CyberShield.sh my_folder password
 ```
 
 ## Tech Stack

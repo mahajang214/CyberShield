@@ -1,5 +1,4 @@
 #!/bin/bash
-# ransomeware
 
 
 CURRENT_DIR=$(pwd)
@@ -15,8 +14,8 @@ if [[ -z "$PASSWORD" ]]; then
     echo "No password provided. Exiting."
     exit 1
 fi
-# ransomeware
-ransomeware(){
+# ransomewa
+set_encryption(){
     repo="$1"
 
     if [[ -f "$repo" ]]; then
@@ -53,7 +52,7 @@ ransomeware(){
 }
 
 # decrypt ransomware
-decrypt_ransomewares(){
+decrypt_encryption(){
     repo="$1"
 
     if [[ "$repo" == *.tar.gz.enc ]]; then
@@ -97,9 +96,9 @@ TARGET_IS_FILE=$(find ~/ -type f -name "${TARGET}*" 2>/dev/null | head -n 1)
 
 if [[ "$TARGET_IS_FILE" ]]; then
     if [[ "$TARGET_IS_FILE" == *.enc ]]; then
-        decrypt_ransomewares "$TARGET_IS_FILE"
+        decrypt_encryption "$TARGET_IS_FILE"
     else 
-        ransomeware "$TARGET_IS_FILE"
+        set_encryption "$TARGET_IS_FILE"
     fi
     exit 0
 fi
@@ -120,9 +119,9 @@ cd "$TARGET_DIR" || { echo "Failed to enter directory: $TARGET_DIR"; exit 1; }
 for repo in "${ALL_REPOS[@]}"; do
     if [[ -f "$repo" || -d "$repo" ]]; then
         if [[ "$repo" == *.enc || "$repo" == *.tar.gz.enc  ]]; then
-            decrypt_ransomewares "$repo"
+            decrypt_encryption "$repo"
         else
-            ransomeware "$repo"
+            set_encryption "$repo"
         fi
     else
         echo "Skipping unknown item: $repo"
