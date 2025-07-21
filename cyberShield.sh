@@ -2,19 +2,24 @@
 
 
 CURRENT_DIR=$(pwd)
+RED='\e[91m'
+GREEN='\e[92m'
+RESET='\e[0m'
 
 # usage
 if [[ "$#" -eq 0 ]]; then
-    echo "Usage : $0 <directory_to_encrypt || directory_to_decrypt> <password>"
+    echo
+    echo -e "\e[91mUsage : $0 <directory_to_encrypt || directory_to_decrypt> <password>  \e[0m"
     exit 1
 fi
 
 PASSWORD="$2"
 if [[ -z "$PASSWORD" ]]; then
-    echo "No password provided. Exiting."
+    echo -e "\e[91No password provided. Exiting. ${RESET}"
     exit 1
 fi
-# ransomewa
+echo -e "\e[92m"
+# encrypt
 set_encryption(){
     repo="$1"
 
@@ -23,7 +28,8 @@ set_encryption(){
         openssl enc -aes-256-cbc -salt \
             -in "$repo" \
             -out "$repo.enc" \
-            -pass pass:"$PASSWORD"
+            -pass pass:"$PASSWORD" \
+            -pbkdf2 -iter 100000
         rm "$repo"  # Remove original file after encryption
 
     elif [[ -d "$repo" ]]; then
@@ -39,7 +45,8 @@ set_encryption(){
         openssl enc -aes-256-cbc -salt \
             -in "$archive_name" \
             -out "$encrypted_name" \
-            -pass pass:"$PASSWORD"
+            -pass pass:"$PASSWORD" \
+            -pbkdf2 -iter 100000
 
         # Remove original archive and optionally the folder
         rm -r "$repo" "$archive_name"
@@ -51,7 +58,7 @@ set_encryption(){
     fi
 }
 
-# decrypt ransomware
+# decrypt 
 decrypt_encryption(){
     repo="$1"
 
@@ -65,7 +72,8 @@ decrypt_encryption(){
         openssl enc -d -aes-256-cbc \
             -in "$repo" \
             -out "$decrypted_archive" \
-            -pass pass:"$PASSWORD"
+            -pass pass:"$PASSWORD" \
+             -pbkdf2 -iter 100000
 
         # Extract the decrypted archive
         tar -xzf "$decrypted_archive"
@@ -80,7 +88,8 @@ decrypt_encryption(){
         openssl enc -d -aes-256-cbc \
             -in "$repo" \
             -out "$decrypted_file" \
-            -pass pass:"$PASSWORD"
+            -pass pass:"$PASSWORD" \
+             -pbkdf2 -iter 100000
 
         rm -r "$repo"  # Remove the encrypted file after decryption
     else
@@ -136,5 +145,5 @@ done
 
 
 
-
+echo -e "Operation successful\e[0m"
 cd "$CURRENT_DIR"
