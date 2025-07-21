@@ -18,7 +18,7 @@ if [[ -z "$PASSWORD" ]]; then
     echo -e "\e[91No password provided. Exiting. ${RESET}"
     exit 1
 fi
-echo -e "\e[92m"
+echo -e "\e[92m Starting encryption"
 # encrypt
 set_encryption(){
     repo="$1"
